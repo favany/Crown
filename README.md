@@ -1,3 +1,3 @@
 # crwn-clothing
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-jmqyg4)
+[StackBlitz ⚡️](https://stackblitz.com/edit/crown)
