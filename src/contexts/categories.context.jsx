@@ -242,16 +242,15 @@ export const CategoriesProvider = ({ children }) => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       console.log(categoryMap);
+      setCategoriesMap(categoriesMap);
     };
-    try {
-      getCategoriesMap();
-    } catch (e) {
-      console.log(e);
-    }
+
+    getCategoriesMap();
   }, []);
 
+  const value = { categoriesMap };
   return (
-    <CategoriesContext.Provider value={{ categoriesMap }}>
+    <CategoriesContext.Provider value={value}>
       {children}
     </CategoriesContext.Provider>
   );
