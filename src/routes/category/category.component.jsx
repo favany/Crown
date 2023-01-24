@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import ProductCard from '../../components/product-card/product-card.component';
 import { CategoriesContext } from '../../contexts/categories.context';
 
@@ -8,23 +9,21 @@ import './category.styles.scss';
 const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
-    if (categoriesMap[category]) {
-      setProducts(categoriesMap[category]);
-    }
-  }, [category, categoriesMap]);
+    setProducts(categoriesMap[category]);
+    console.log('changing');
+  }, [category]);
 
-  console.log('category', category);
-
-  console.log('products', products);
+  console.log('Category rendering,', category, products);
 
   return (
     <div className="category-container">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {products &&
+        products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
     </div>
   );
 };

@@ -249,10 +249,8 @@ export const CategoriesProvider = ({ children }) => {
     });
   }, []);
 
-  const value = { categoriesMap };
-  console.log(value);
   return (
-    <CategoriesContext.Provider value={value}>
+    <CategoriesContext.Provider value={{ categoriesMap }}>
       {children}
     </CategoriesContext.Provider>
   );
