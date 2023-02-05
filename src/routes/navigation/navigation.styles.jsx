@@ -1,3 +1,5 @@
+// styled-components: https://styled-components.com/
+
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 

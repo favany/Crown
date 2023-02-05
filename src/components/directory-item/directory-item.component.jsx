@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './directory-item.styles.scss';
 
@@ -12,8 +13,10 @@ const DirectoryItem = ({ category: { id, imageUrl, title } }) => {
         }}
       ></div>
       <div className="body">
-        <h2>{title}</h2>
-        <p>Shop Now</p>
+        <Link to={`shop/${title}`}>
+          <h2 style={{ textTransform: 'uppercase' }}>{title}</h2>
+          <p>Shop Now</p>
+        </Link>
       </div>
     </div>
   );

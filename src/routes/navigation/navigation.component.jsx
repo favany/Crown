@@ -15,13 +15,13 @@ import { CartContext } from '../../contexts/cart.context';
 // Utils
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
-import {
-  NavigationContainer,
-  NavLink,
-  NavLinks,
-  LogoContainer,
-} from './navigation.styles';
-// import './navigation.styles.scss';
+// import {
+//   NavigationContainer,
+//   NavLink,
+//   NavLinks,
+//   LogoContainer,
+// } from './navigation.styles';
+import './navigation.styles.scss';
 
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -35,7 +35,8 @@ const Navigation = () => {
   };
   return (
     <>
-      <NavigationContainer>
+      {/* styled-component */}
+      {/* <NavigationContainer>
         <LogoContainer to="/">
           <img className="logo" src={logo} alt="Logo" />
         </LogoContainer>
@@ -54,8 +55,8 @@ const Navigation = () => {
         </NavLinks>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>
-      <Outlet />
-      {/* <div className="navigation">
+      <Outlet /> */}
+      <div className="navigation">
         <Link className="logo-container" to="/">
           <img className="logo" src={logo} alt="Logo" />
         </Link>
@@ -64,9 +65,14 @@ const Navigation = () => {
             SHOP
           </Link>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
-              Hello,{currentUser.displayName}. SIGN OUT
-            </span>
+            <>
+              <span className="nav-link" style={{ cursor: 'inherit' }}>
+                Hello,{currentUser.displayName}.
+              </span>
+              <span className="nav-link" onClick={signOutHandler}>
+                SIGN OUT
+              </span>
+            </>
           ) : (
             <Link className="nav-link" to="/auth">
               SIGN IN
@@ -76,7 +82,8 @@ const Navigation = () => {
           <CartIcon />
         </div>
         {isCartOpen && <CartDropdown />}
-      </div> */}
+      </div>
+      <Outlet />
     </>
   );
 };
