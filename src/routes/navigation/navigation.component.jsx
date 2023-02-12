@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // img
 import logo from '../../assets/crown.svg';
@@ -9,53 +10,24 @@ import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
 // Context
-import { UserContext } from '../../contexts/user.context';
+import { selectCurrentUser } from '../../store/user/user.selector';
 import { CartContext } from '../../contexts/cart.context';
 
 // Utils
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
-// import {
-//   NavigationContainer,
-//   NavLink,
-//   NavLinks,
-//   LogoContainer,
-// } from './navigation.styles';
 import './navigation.styles.scss';
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser);
+
+  const { isCartOpen } = useContext(CartContext);
   console.log('currentUser', currentUser);
 
-  const signOutHandler = async () => {
-    const res = await signOutUser();
-    console.log(res);
-    setCurrentUser(null);
-  };
+  const signOutHandler = () => {};
+
   return (
     <>
-      {/* styled-component */}
-      {/* <NavigationContainer>
-        <LogoContainer to="/">
-          <img className="logo" src={logo} alt="Logo" />
-        </LogoContainer>
-        <NavLinks>
-          <NavLink to="/shop">SHOP</NavLink>
-
-          {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
-              Hello,{currentUser.displayName}. SIGN OUT
-            </span>
-          ) : (
-            <NavLink to="/auth"> SIGN IN</NavLink>
-          )}
-
-          <CartIcon />
-        </NavLinks>
-        {isCartOpen && <CartDropdown />}
-      </NavigationContainer>
-      <Outlet /> */}
       <div className="navigation">
         <Link className="logo-container" to="/">
           <img className="logo" src={logo} alt="Logo" />
