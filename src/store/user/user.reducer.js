@@ -1,4 +1,4 @@
-import { USER_ACTION_TYPES } from './user.type';
+import { USER_ACTION_TYPES } from './user.types';
 
 export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: 'SET_CURRENT_USER',
