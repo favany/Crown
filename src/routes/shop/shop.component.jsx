@@ -7,6 +7,7 @@ import Category from '../category/category.component';
 
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
 import { setCategories } from '../../store/categories/category.action';
+import { fetchCategoriesAsync } from '../../store/categories/category.action';
 
 import './shop.styles.scss';
 
@@ -19,10 +20,15 @@ const getCategoriesMap = async () => {
 const Shop = () => {
   const dispatch = useDispatch();
 
+  // backup if error
+  // useEffect(() => {
+  //   getCategoriesMap().then((categoryArray) => {
+  //     dispatch(setCategories(categoryArray));
+  //   });
+  // }, []);
+
   useEffect(() => {
-    getCategoriesMap().then((categoryArray) => {
-      dispatch(setCategories(categoryArray));
-    });
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   return (
