@@ -1,39 +1,32 @@
 import { compose, createStore, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 
 import { rootReducer } from './root-reducer';
 
-const loggerMiddleware = (store) => (next) => (action) => {
-  if (!action.type) {
-    return next(action);
-  }
+// redux-persist config
+const persistConfig = { key: 'root', storage, blacklist: ['user'] };
 
-  console.log('type', action.type);
-  console.log('payload', action.payload);
-  console.log('currentState', action.getState());
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-  next(action);
+const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(
+  Boolean
+);
 
-  console.log('next state: ', store.getState());
-};
+// config redux devtools
+const composeEnhancer =
+  (process.env.NODE_ENV !== 'production' &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
-const middleWares = [logger];
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+export const store = createStore(
+  persistedReducer,
+  undefined,
+  composedEnhancers
+);
 
-export const store = createStore(rootReducer, undefined, composedEnhancers);
-
-/**
- * 
-
-const curryFunc = (a) => (b, c) => {
-  a + b -c
-}
-
-const with3 = curryFunc(3)
-withA(2, 4)
-
-3 + 2 - 4
-
-
- */
+export const persistor = persistStore(store);
