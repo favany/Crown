@@ -25,8 +25,6 @@ const Navigation = () => {
 
   console.log('currentUser', currentUser);
 
-  const signOutHandler = () => {};
-
   return (
     <>
       <div className="navigation">
@@ -42,7 +40,7 @@ const Navigation = () => {
               <span className="nav-link" style={{ cursor: 'inherit' }}>
                 Hello,{currentUser.displayName}.
               </span>
-              <span className="nav-link" onClick={signOutHandler}>
+              <span className="nav-link" onClick={signOutUser}>
                 SIGN OUT
               </span>
             </>
