@@ -2,7 +2,7 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import { USER_ACTION_TYPES } from './user.types';
 
-import { signInSuccess, signInFailed } from './user.action';
+import { signInSuccess, signInFailure } from './user.action';
 
 import {
   getCurrentUser,
@@ -18,7 +18,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
     );
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(signInFailed(error));
+    yield put(signInFailure(error));
   }
 }
 
@@ -28,7 +28,7 @@ export function* isUserAuthenticated() {
     if (!userAuth) return; // not sign in
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
-    yield put(signInFailed(error));
+    yield put(signInFailure(error));
   }
 }
 
