@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // img
 import logo from '../../assets/crown.svg';
@@ -11,17 +11,20 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 
 // Context
 import { selectCurrentUser } from '../../store/user/user.selector';
-// import { CartContext } from '../../contexts/cart.context';
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
+import { signOutStart } from '../../store/user/user.action';
 
 // Utils
-import { signOutUser } from '../../utils/firebase/firebase.utils';
+// import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 import './navigation.styles.scss';
 
 const Navigation = () => {
+  const dispatch = useDispatch();
+
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+  const signOutUser = () => dispatch(signOutStart());
 
   console.log('currentUser', currentUser);
 
