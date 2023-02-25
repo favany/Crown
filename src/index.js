@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { Elements } from '@stripe/react-stripe-js';
+
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
@@ -20,7 +22,9 @@ root.render(
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <CartProvider>
-            <App />
+            <Elements>
+              <App />
+            </Elements>
           </CartProvider>
         </BrowserRouter>
       </PersistGate>
